@@ -96,17 +96,18 @@ namespace MemUsage
 
         int n = 0;
         private bool Paused;
+        private Item<Process> SelectedItem;
 
         private unsafe void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                if (comboBox1.SelectedItem == null || !Paused) return;
+                if (SelectedItem == null || !Paused) return;
 
-                var p = Process.GetProcesses().Where(process => process.Id == (comboBox1.SelectedItem as Item<Process>).Value.Id);
+                var p = Process.GetProcesses().Where(process => process.Id == SelectedItem.Value.Id);
 
                 if (!p.Any()) {
-                    p = Process.GetProcesses().Where(process => process.ProcessName == (comboBox1.SelectedItem as Item<Process>).Value.ProcessName);
+                    p = Process.GetProcesses().Where(process => process.ProcessName == SelectedItem.Value.ProcessName);
                 }
 
                 if (!p.Any()) return;
@@ -179,8 +180,10 @@ namespace MemUsage
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedItem == null) return;
+
             Paused = !Paused;
-            button2.Image = Paused ? Properties.Resources.play128 : Properties.Resources.pause41;
+            button2.Image = !Paused ? Properties.Resources.play128 : Properties.Resources.pause41;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -189,6 +192,11 @@ namespace MemUsage
                 s.Value.Points.Clear();
 
             n = 0;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedItem = comboBox1.SelectedItem as Item<Process>;
         }
     }
 }

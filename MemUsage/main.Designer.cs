@@ -71,10 +71,11 @@ namespace MemUsage
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(689, 21);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button3
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Image = global::MemUsage.Properties.Resources.clear5;
             this.button3.Location = new System.Drawing.Point(722, 550);
             this.button3.Name = "button3";
